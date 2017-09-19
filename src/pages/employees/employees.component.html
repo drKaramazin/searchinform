@@ -1,1 +1,5 @@
-Employees!
+Employee!
+
+{{(employee | async)?.name}}
+{{(employee | async)?.phone}}
+<img *ngIf="employee | async" [src]="(employee | async)?.photoData" />

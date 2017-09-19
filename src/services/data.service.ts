@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 
 import { IDepartment } from '../models/department.model';
 import { IEmployee } from '../models/employee.model';
+import { IPhoto } from '../models/photo.model';
 
 @Injectable()
 export class DataService {
@@ -13,13 +14,13 @@ export class DataService {
   constructor(private http: Http) {
   }
 
-  private getData(): Promise<any> {
+  private dataMock(): Promise<any> {
     return this.http.get('./assets/data.json')
       .map((res: any) => res.json()).toPromise()
   }
 
   async getDepartments(): Promise<IDepartment[]> {
-    return this.getData().then((data) => {
+    return this.dataMock().then((data) => {
       return data.departments;
     }).catch((error) => {
       return null;
@@ -27,8 +28,16 @@ export class DataService {
   }
 
   async getEmployees(): Promise<IEmployee[]> {
-    return this.getData().then((data) => {
+    return this.dataMock().then((data) => {
       return data.employees;
+    }).catch((error) => {
+      return null;
+    });
+  }
+
+  async getPhotos(): Promise<IPhoto[]> {
+    return this.dataMock().then((data) => {
+      return data.photos;
     }).catch((error) => {
       return null;
     });

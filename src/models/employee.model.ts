@@ -3,5 +3,6 @@ export interface IEmployee {
   department: string;
   phone: string;
   photo: string;
+  photoData?: string;
   name: string;
 }

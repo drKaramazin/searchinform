@@ -7,6 +7,7 @@ Employees list
             <th>Департамент</th>
             <th>ФИО</th>
             <th>Телефон</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +16,13 @@ Employees list
             <td>{{employee.department}}</td>
             <td>{{employee.name}}</td>
             <td>{{employee.phone}}</td>
+            <td>
+                <a
+                    [routerLink]="['/employees/'+employee.id]"
+                    class="btn btn-primary"
+                    role="button"
+                >Просмотр сотрудника</a>
+            </td>
         </tr>
     </tbody>
 </table>

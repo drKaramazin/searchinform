@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { IDepartment } from '../models/department.model';
 import { IEmployee } from '../models/employee.model';
+import { IPhoto } from '../models/photo.model';
 import { DataService } from './data.service';
 
 @Injectable()
@@ -36,6 +37,22 @@ export class StorageService {
     }
 
     return department === undefined ? employees : this.getEmpoyeesFromDepartment(employees, department);
+  }
+
+  async getEmployee(id: string): Promise<IEmployee> {
+    const employees: IEmployee[] = await this.getEmployees();
+    let photos: IPhoto[] = await this.dataService.getPhotos();
+
+    if (photos === null) {
+      photos = JSON.parse(localStorage.getItem('photos'));
+    } else {
+      localStorage.setItem('photos', JSON.stringify(photos));
+    }
+
+    const employee = employees.find((element) => element.id === id);
+    employee.photoData = photos.find((element) => element.id === employee.photo).data;
+
+    return employee;
   }
 
 }
