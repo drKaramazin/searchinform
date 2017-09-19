@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 
 import { IDepartment } from '../../models/department.model';
-import { StorageService} from '../../services/storage.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   templateUrl: './departments.component.html',

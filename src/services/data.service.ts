@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { IDepartment } from '../models/department.model';
+import { IEmployee } from '../models/employee.model';
 
 @Injectable()
 export class DataService {
@@ -20,6 +21,14 @@ export class DataService {
   async getDepartments(): Promise<IDepartment[]> {
     return this.getData().then((data) => {
       return data.departments;
+    }).catch((error) => {
+      return null;
+    });
+  }
+
+  async getEmployees(): Promise<IEmployee[]> {
+    return this.getData().then((data) => {
+      return data.employees;
     }).catch((error) => {
       return null;
     });

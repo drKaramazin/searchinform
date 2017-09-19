@@ -1,1 +1,20 @@
 Employees list
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Департамент</th>
+            <th>ФИО</th>
+            <th>Телефон</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employees | async">
+            <td>{{employee.id}}</td>
+            <td>{{employee.department}}</td>
+            <td>{{employee.name}}</td>
+            <td>{{employee.phone}}</td>
+        </tr>
+    </tbody>
+</table>
