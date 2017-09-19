@@ -1,5 +1,19 @@
-Employee!
+<h1>Карточка сотрудника</h1>
 
-{{(employee | async)?.name}}
-{{(employee | async)?.phone}}
-<img *ngIf="employee | async" [src]="(employee | async)?.photoData" />
+<div class="card-container">
+    <div class="image">
+        <img *ngIf="employee | async" [src]="(employee | async)?.photoData" />
+    </div>
+    <div class="data">
+        <table class="table">
+            <tr>
+                <td>ФИО</td>
+                <td>{{(employee | async)?.name}}</td>
+            </tr>
+            <tr>
+                <td>Номертелефона</td>
+                <td>{{(employee | async)?.phone}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Location } from '@angular/common';
 
 import { IEmployee } from '../../models/employee.model';
 import { StorageService } from '../../services/storage.service';
@@ -16,6 +17,7 @@ export class EmployeesListComponent implements AfterViewInit, OnDestroy {
   constructor(
     private storage: StorageService,
     private route: ActivatedRoute,
+    private location: Location,
   ) {
   }
 
@@ -27,6 +29,10 @@ export class EmployeesListComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.employeeIdRoute$.unsubscribe();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
