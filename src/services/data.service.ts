@@ -4,10 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-export interface IDepartment {
-  id: string,
-  name: string,
-}
+import { IDepartment } from '../models/department.model';
 
 @Injectable()
 export class DataService {

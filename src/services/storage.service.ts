@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { DataService, IDepartment } from './data.service';
+import { IDepartment } from '../models/department.model';
+import { DataService } from './data.service';
 
 @Injectable()
 export class StorageService {
