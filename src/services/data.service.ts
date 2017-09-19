@@ -22,7 +22,6 @@ export class DataService {
 
   async getDepartments(): Promise<IDepartment[]> {
     return this.getData().then((data) => {
-      console.log('data', data.departments);
       return data.departments;
     }).catch((error) => {
       return null;

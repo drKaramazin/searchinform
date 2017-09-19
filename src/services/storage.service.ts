@@ -11,10 +11,11 @@ export class StorageService {
   }
 
   async getDepartments(): Promise<IDepartment[]> {
-     const departments: IDepartment[] = await this.dataService.getDepartments();
+    const departments: IDepartment[] = await this.dataService.getDepartments();
     if (departments === null) {
-      return [];
+      return JSON.parse(localStorage.getItem('departments'));
     } else {
+      localStorage.setItem('departments', JSON.stringify(departments));
       return departments;
     }
   }

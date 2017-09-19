@@ -8,13 +8,13 @@ import { IDepartment } from '../../services/data.service';
 })
 export class DepartmentsComponent implements AfterViewInit {
 
-  departments: IDepartment[];
+  departments: Promise<IDepartment[]>;
 
   constructor(private storage: StorageService) {
   }
 
-  async ngAfterViewInit() {
-    this.departments = await this.storage.getDepartments();
+  ngAfterViewInit() {
+    this.departments = this.storage.getDepartments();
   }
 
 }
