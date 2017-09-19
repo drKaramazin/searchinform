@@ -1,4 +1,5 @@
 <h1>Список сотрудников</h1>
+<h2 *ngIf="departmentId"> Департамент "{{departmentId | departmentName | async}}" </h2>
 
 <table class="table table-hover">
     <thead>
@@ -13,16 +14,19 @@
     <tbody>
         <tr *ngFor="let employee of employees | async">
             <td>{{employee.id}}</td>
-            <td>{{employee.department}}</td>
+            <td>{{employee.department | departmentName | async}}</td>
             <td>{{employee.name}}</td>
             <td>{{employee.phone}}</td>
-            <td>
+            <td class="buttons">
                 <a
                     [routerLink]="['/employees/'+employee.id]"
                     class="btn btn-primary"
                     role="button"
                 >Просмотр сотрудника</a>
             </td>
+        </tr>
+        <tr>
+            <td colspan="5">Всего: <span>{{(employees | async)?.length}}</span> сотрудников</td>
         </tr>
     </tbody>
 </table>

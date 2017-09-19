@@ -39,6 +39,13 @@ export class StorageService {
     return department === undefined ? employees : this.getEmpoyeesFromDepartment(employees, department);
   }
 
+  async getDapartmentName(id: string): Promise<string> {
+    const departments: IDepartment[] = await this.getDepartments();
+    const department: IDepartment = departments.find((element) => element.id === id);
+
+    return department.name;
+  }
+
   async getEmployee(id: string): Promise<IEmployee> {
     const employees: IEmployee[] = await this.getEmployees();
     let photos: IPhoto[] = await this.dataService.getPhotos();

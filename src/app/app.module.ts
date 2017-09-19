@@ -11,6 +11,7 @@ import { EmployeesComponent } from '../pages/employees/employees.component';
 
 import { DataService } from '../services/data.service';
 import { StorageService } from '../services/storage.service';
+import { DepartmentNamePipe } from '../pipes/department-name.pipe';
 
 const appRoutes: Routes = [
   { path: 'departments', component: DepartmentsComponent },
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    DepartmentNamePipe,
     NotFoundComponent,
     DepartmentsComponent,
     EmployeesListComponent,

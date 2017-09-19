@@ -11,6 +11,7 @@ import { StorageService } from '../../services/storage.service';
 })
 export class EmployeesListComponent implements AfterViewInit, OnDestroy {
 
+  departmentId: string;
   employees: Promise<IEmployee[]>;
   private employeeIdRoute$: Subscription;
 
@@ -23,7 +24,8 @@ export class EmployeesListComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.employeeIdRoute$ = this.route.params.subscribe(params => {
-      this.employees = this.storage.getEmployees(params['id']);
+      this.departmentId = params['id'];
+      this.employees = this.storage.getEmployees(this.departmentId);
     });
   }
 
