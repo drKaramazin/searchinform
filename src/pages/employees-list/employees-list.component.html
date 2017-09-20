@@ -1,5 +1,9 @@
 <h1>Список сотрудников</h1>
-<h2 *ngIf="departmentId"> Департамент "{{departmentId | departmentName | async}}" </h2>
+
+<ol class="breadcrumb" *ngIf="departmentId">
+    <li><a [routerLink]="['/']">Департаменты</a></li>
+    <li class="active">{{departmentId | departmentName | async}}</li>
+</ol>
 
 <table class="table table-hover">
     <thead>

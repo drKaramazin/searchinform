@@ -11,7 +11,11 @@ export class DepartmentNamePipe implements PipeTransform {
   }
 
   transform(id: string): Promise<string> {
-    return this.storage.getDapartmentName(id);
+    if (id) {
+      return this.storage.getDapartmentName(id);
+    } else {
+      return null;
+    }
   }
 
 }

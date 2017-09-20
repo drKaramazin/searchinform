@@ -1,5 +1,11 @@
 <h1>Карточка сотрудника</h1>
 
+<ol class="breadcrumb" *ngIf="(employee | async)?.department">
+    <li><a [routerLink]="['/']">Департаменты</a></li>
+    <li><a [routerLink]="['/departments/'+(employee | async)?.department+'/employees']">{{(employee | async)?.department | departmentName | async}}</a></li>
+    <li class="active">{{(employee | async)?.name}}</li>
+</ol>
+
 <div class="card-container">
     <div class="image">
         <img *ngIf="employee | async" [src]="(employee | async)?.photoData" />
