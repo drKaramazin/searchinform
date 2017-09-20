@@ -5,7 +5,7 @@ import { StorageService } from '../../services/storage.service';
 
 @Component({
   templateUrl: './departments.component.html',
-  styleUrls: ['./departments.component.css']
+  styleUrls: ['./departments.component.scss']
 })
 export class DepartmentsComponent implements AfterViewInit {
 

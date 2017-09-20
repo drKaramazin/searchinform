@@ -7,7 +7,7 @@ import { StorageService } from '../../services/storage.service';
 
 @Component({
   templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.css']
+  styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements AfterViewInit, OnDestroy {
   employee: Promise<IEmployee>;
