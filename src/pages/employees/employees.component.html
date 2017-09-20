@@ -1,24 +1,29 @@
 <h1>Карточка сотрудника</h1>
 
-<ol class="breadcrumb" *ngIf="(employee | async)?.department">
+<ol class="breadcrumb" *ngIf="employee">
     <li><a [routerLink]="['/']">Департаменты</a></li>
-    <li><a [routerLink]="['/departments/'+(employee | async)?.department+'/employees']">{{(employee | async)?.department | departmentName | async}}</a></li>
-    <li class="active">{{(employee | async)?.name}}</li>
+    <li><a [routerLink]="['/departments/'+employee.department+'/employees']">{{employee.department | departmentName | async}}</a></li>
+    <li class="active">{{employee.name}}</li>
 </ol>
 
-<div class="card-container">
-    <div class="image">
-        <img *ngIf="employee | async" [src]="(employee | async)?.photoData" />
+<div class="card-container" *ngIf="employee">
+    <div class="image-container">
+        <img [src]="employee.photoData" />
+        <form class="photo-uploader-form">
+            <div class="file-upload" data-text="Выберите файл">
+                <input type="file" (change)="photoSelect($event)">
+            </div>
+        </form>
     </div>
     <div class="data">
         <table class="table">
             <tr>
                 <td>ФИО</td>
-                <td>{{(employee | async)?.name}}</td>
+                <td>{{employee.name}}</td>
             </tr>
             <tr>
                 <td>Номертелефона</td>
-                <td>{{(employee | async)?.phone}}</td>
+                <td>{{employee.phone}}</td>
             </tr>
         </table>
     </div>

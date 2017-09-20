@@ -13,8 +13,12 @@ export class StorageService {
   ) {
   }
 
-  getEmpoyeesFromDepartment(employees: IEmployee[], department: string): IEmployee[] {
+  private getEmpoyeesFromDepartment(employees: IEmployee[], department: string): IEmployee[] {
     return employees.filter((element) => element.department === department);
+  }
+
+  private cacheData(itemName: string, data: any) {
+    localStorage.setItem(itemName, JSON.stringify(data));
   }
 
   async getDepartments(): Promise<IDepartment[]> {
@@ -22,7 +26,7 @@ export class StorageService {
     if (departments === null) {
       return JSON.parse(localStorage.getItem('departments'));
     } else {
-      localStorage.setItem('departments', JSON.stringify(departments));
+      this.cacheData('departments', departments);
       return departments;
     }
   }
@@ -33,7 +37,7 @@ export class StorageService {
     if (employees === null) {
       employees = JSON.parse(localStorage.getItem('employees'));
     } else {
-      localStorage.setItem('employees', JSON.stringify(employees));
+      this.cacheData('employees', employees);
     }
 
     return department === undefined ? employees : this.getEmpoyeesFromDepartment(employees, department);
@@ -46,20 +50,33 @@ export class StorageService {
     return department.name;
   }
 
+  async getPhotos(): Promise<IPhoto[]> {
+    // If phtos cached in localStorage used cache:
+    if (localStorage.getItem('photos')) {
+      return JSON.parse(localStorage.getItem('photos'));
+    } else {
+      const photos: IPhoto[] = await this.dataService.getPhotos();
+      this.cacheData('photos', photos);
+
+      return photos;
+    }
+  }
+
   async getEmployee(id: string): Promise<IEmployee> {
     const employees: IEmployee[] = await this.getEmployees();
-    let photos: IPhoto[] = await this.dataService.getPhotos();
-
-    if (photos === null) {
-      photos = JSON.parse(localStorage.getItem('photos'));
-    } else {
-      localStorage.setItem('photos', JSON.stringify(photos));
-    }
+    const photos: IPhoto[] = await this.getPhotos();
 
     const employee = employees.find((element) => element.id === id);
     employee.photoData = photos.find((element) => element.id === employee.photo).data;
 
     return employee;
+  }
+
+  async updatePhotoCache(id: string, photoData: string) {
+    const photos: IPhoto[] = await this.getPhotos();
+    const index = photos.findIndex((element) => element.id === id);
+    photos[index].data = photoData;
+    this.cacheData('photos', photos);
   }
 
 }
